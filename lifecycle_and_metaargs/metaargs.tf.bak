@@ -1,0 +1,14 @@
+provider "aws" {
+  region = "us-east-2"
+}
+
+variable "aws_iam_names" {
+  type = list(string)
+  default = [ "user-11", "user-2", "user-3", "user-4"]
+}
+
+resource "aws_iam_user" "users" {
+  name = var.aws_iam_names[count.index]
+  count = 4
+}
+
